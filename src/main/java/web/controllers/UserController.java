@@ -24,7 +24,7 @@ public class UserController {
 
     @PutMapping(path = "{uuid}/dt_update/{dt_update}")
     public ResponseEntity<?> update(@PathVariable("uuid") UUID uuid,
-                                    @PathVariable("dt_update")Date dt_update){
+                                    @PathVariable("dt_update") Long dt_update){
         return ResponseEntity.status(200).build();
     }
 }
