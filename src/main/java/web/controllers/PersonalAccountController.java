@@ -21,7 +21,8 @@ public class PersonalAccountController {
     }
 
     @GetMapping(path = "/verification")
-    public ResponseEntity<?> verified(@RequestParam(value = "code") String code) {
+    public ResponseEntity<?> verified(@RequestParam(value = "code") String code,
+                                      @RequestParam(value = "mail") String mail) {
         return ResponseEntity.status(200).build();
     }
 
