@@ -14,6 +14,8 @@ public class UserDTO {
     private UserRole role;
     private UserStatus status;
 
+    public UserDTO(){
+    }
     public UserDTO(BaseEssence essence, String mail, String fio, UserRole role, UserStatus status) {
         this.essence = essence;
         this.mail = mail;
