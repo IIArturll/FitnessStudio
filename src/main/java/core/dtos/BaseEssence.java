@@ -1,17 +1,21 @@
 package core.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
-public class BaseEssence {
-    private UUID uuid;
+@JsonPropertyOrder({"dt_create", "dt_update"})
+public abstract class BaseEssence {
+    @JsonIgnore
+    protected UUID uuid;
     @JsonProperty("dt_create")
-    private Date dtCreate;
+    protected Date dtCreate;
     @JsonProperty("dt_update")
-    private Date dtUpdate;
+    protected Date dtUpdate;
 
     public BaseEssence() {
     }
@@ -26,12 +30,12 @@ public class BaseEssence {
         return uuid;
     }
 
-    public Date getDtCreate() {
-        return dtCreate;
+    public Long getDtCreate() {
+        return dtCreate.getTime();
     }
 
-    public Date getDtUpdate() {
-        return dtUpdate;
+    public Long getDtUpdate() {
+        return dtUpdate.getTime();
     }
 
     public void setUuid(UUID uuid) {

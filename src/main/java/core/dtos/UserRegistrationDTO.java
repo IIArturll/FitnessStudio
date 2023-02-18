@@ -1,5 +1,10 @@
 package core.dtos;
 
+import core.exceptions.MultipleErrorResponse;
+import core.validators.FIOValidator;
+import core.validators.MailValidator;
+import core.validators.PasswordValidator;
+
 import java.util.Objects;
 
 public class UserRegistrationDTO {
@@ -10,10 +15,11 @@ public class UserRegistrationDTO {
     public UserRegistrationDTO() {
     }
 
-    public UserRegistrationDTO(String mail, String fio, String password) {
+    public UserRegistrationDTO(String mail, String fio, String password) throws MultipleErrorResponse {
         this.mail = mail;
         this.fio = fio;
         this.password = password;
+        validate();
     }
 
     public String getMail() {
@@ -38,6 +44,16 @@ public class UserRegistrationDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void validate() throws MultipleErrorResponse {
+        MultipleErrorResponse errorResponse = new MultipleErrorResponse("invalid fields");
+        MailValidator.validate(errorResponse, this.mail);
+        FIOValidator.validate(errorResponse, this.fio);
+        PasswordValidator.validate(errorResponse, this.password);
+        if (!errorResponse.getErrors().isEmpty()) {
+            throw errorResponse;
+        }
     }
 
     @Override

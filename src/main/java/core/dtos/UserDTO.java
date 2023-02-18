@@ -1,35 +1,52 @@
 package core.dtos;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import core.dtos.enums.UserRole;
 import core.dtos.enums.UserStatus;
+import core.exceptions.MultipleErrorResponse;
+import core.exceptions.SingleErrorResponse;
+import core.validators.FIOValidator;
+import core.validators.MailValidator;
+import core.validators.RoleValidator;
+import core.validators.StatusValidator;
 
+import java.util.Date;
 import java.util.Objects;
+import java.util.UUID;
 
-public class UserDTO {
-    @JsonUnwrapped
-    private BaseEssence essence;
-    private String mail;
-    private String fio;
-    private UserRole role;
-    private UserStatus status;
+@JsonPropertyOrder({"uuid",
+        "dt_create",
+        "dt_update",
+        "mail",
+        "fio",
+        "role",
+        "status"})
+public class UserDTO extends BaseEssence {
+    protected String mail;
+    protected String fio;
+    protected UserRole role;
+    protected UserStatus status;
 
-    public UserDTO(){
+    public UserDTO() {
     }
-    public UserDTO(BaseEssence essence, String mail, String fio, UserRole role, UserStatus status) {
-        this.essence = essence;
+
+    public UserDTO(String mail, String fio, UserRole role, UserStatus status) throws MultipleErrorResponse, SingleErrorResponse {
+        super(UUID.randomUUID(), new Date(), new Date());
         this.mail = mail;
         this.fio = fio;
         this.role = role;
         this.status = status;
+        validate();
     }
 
-    public BaseEssence getEssence() {
-        return essence;
-    }
-
-    public void setEssence(BaseEssence essence) {
-        this.essence = essence;
+    public UserDTO(UUID uuid, Date dt_create, Date dt_update, String mail,
+                   String fio, UserRole role, UserStatus status) throws MultipleErrorResponse{
+        super(uuid, dt_create, dt_update);
+        this.mail = mail;
+        this.fio = fio;
+        this.role = role;
+        this.status = status;
+        validate();
     }
 
     public String getMail() {
@@ -64,27 +81,45 @@ public class UserDTO {
         this.status = status;
     }
 
+    public void validate() throws MultipleErrorResponse {
+        MultipleErrorResponse errorResponse = new MultipleErrorResponse("invalid fields");
+        MailValidator.validate(errorResponse, this.mail);
+        FIOValidator.validate(errorResponse, this.fio);
+        RoleValidator.validate(errorResponse, this.role);
+        StatusValidator.validate(errorResponse, this.status);
+        if (!errorResponse.getErrors().isEmpty()) {
+            throw errorResponse;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDTO user = (UserDTO) o;
-        return Objects.equals(essence, user.essence) && Objects.equals(mail, user.mail) && Objects.equals(fio, user.fio) && role == user.role && status == user.status;
+        if (!super.equals(o)) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return super.equals(o)
+                && Objects.equals(mail, userDTO.mail)
+                && Objects.equals(fio, userDTO.fio)
+                && role == userDTO.role
+                && status == userDTO.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(essence, mail, fio, role, status);
+        return Objects.hash(super.hashCode(), mail, fio, role, status);
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
-                "essence=" + essence +
-                ", mail='" + mail + '\'' +
-                ", fio='" + fio + '\'' +
-                ", role=" + role +
-                ", status=" + status +
-                '}';
+                "\nuuid= '" + uuid + '\'' +
+                ",\ndt_create= " + getDtCreate() +
+                ",\ndt_create= " + getDtUpdate() +
+                ",\nmail= '" + mail + '\'' +
+                ",\nfio= '" + fio + '\'' +
+                ",\nrole= " + role +
+                ",\nstatus=" + status +
+                "\n}";
     }
 }
