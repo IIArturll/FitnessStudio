@@ -1,15 +1,10 @@
 package web.controllers;
 
-import core.dtos.BaseEssence;
 import core.dtos.UserDTO;
+import core.dtos.UserLoginDTO;
 import core.dtos.UserRegistrationDTO;
-import core.dtos.enums.UserRole;
-import core.dtos.enums.UserStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.UUID;
 
 @RestController()
 @RequestMapping("/api/v1/users")
@@ -27,18 +22,12 @@ public class PersonalAccountController {
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<?> login() {
+    public ResponseEntity<?> login(@RequestBody UserLoginDTO user) {
         return ResponseEntity.status(200).build();
     }
 
     @GetMapping(path = "/me")
     public ResponseEntity<UserDTO> get() {
-        return ResponseEntity.status(200).body(
-                new UserDTO(
-                        new BaseEssence(UUID.randomUUID(), new Date(), new Date()),
-                        "mail@mail.ru",
-                        "fio",
-                        UserRole.USER,
-                        UserStatus.ACTIVATED));
+        return ResponseEntity.status(200).build();
     }
 }
