@@ -1,37 +1,28 @@
 package core.dtos;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.List;
 import java.util.Objects;
 
-public class PageOfUserDTO {
-    @JsonUnwrapped
-    private PageEssence pageDTO;
-    private List<UserDTO> users;
+@JsonPropertyOrder({"number", "size", "total_pages", "total_elements",
+        "first", "number_of_elements", "last", "content"})
+public class PageOfUserDTO extends PageEssence {
+    private List<UserDTO> content;
 
-    public PageOfUserDTO() {
+    public PageOfUserDTO(Integer number, Integer size, Integer totalPages,
+                         Integer totalElements, boolean first, Integer numberOfElement,
+                         boolean last, List<UserDTO> content) {
+        super(number, size, totalPages, totalElements, first, numberOfElement, last);
+        this.content = content;
     }
 
-    public PageOfUserDTO(PageEssence pageDTO, List<UserDTO> users) {
-        this.pageDTO = pageDTO;
-        this.users = users;
+    public void validate() {
+
     }
 
-    public PageEssence getPageDTO() {
-        return pageDTO;
-    }
-
-    public void setPageDTO(PageEssence pageDTO) {
-        this.pageDTO = pageDTO;
-    }
-
-    public List<UserDTO> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<UserDTO> users) {
-        this.users = users;
+    public List<UserDTO> getContent() {
+        return content;
     }
 
     @Override
@@ -39,19 +30,12 @@ public class PageOfUserDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PageOfUserDTO that = (PageOfUserDTO) o;
-        return Objects.equals(pageDTO, that.pageDTO) && Objects.equals(users, that.users);
+        return super.equals(o)
+                && Objects.equals(content, that.content);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pageDTO, users);
-    }
-
-    @Override
-    public String toString() {
-        return "PageOfUserDTO{" +
-                "pageDTO=" + pageDTO +
-                ", users=" + users +
-                '}';
+        return Objects.hash(super.hashCode(), content);
     }
 }

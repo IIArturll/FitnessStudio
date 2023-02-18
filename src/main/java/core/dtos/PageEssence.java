@@ -1,17 +1,37 @@
 package core.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.Objects;
 
-public class PageEssence {
-    private Integer number;
-    private Integer size;
-    private Integer totalPages;
-    private Integer totalElements;
-    private boolean first;
-    private Integer numberOfElement;
-    private boolean last;
+@JsonPropertyOrder({"number", "size", "total_pages", "total_elements",
+        "first", "number_of_elements", "last"})
+public abstract class PageEssence {
+    protected Integer number;
+    protected Integer size;
+    @JsonProperty("total_pages")
+    protected Integer totalPages;
+    @JsonProperty("total_elements")
+    protected Integer totalElements;
+    protected boolean first;
+    @JsonProperty("number_of_elements")
+    protected Integer numberOfElement;
+    protected boolean last;
 
     public PageEssence() {
+    }
+
+    public PageEssence(Integer number, Integer size, Integer totalPages,
+                       Integer totalElements, boolean first,
+                       Integer numberOfElement, boolean last) {
+        this.number = number;
+        this.size = size;
+        this.totalPages = totalPages;
+        this.totalElements = totalElements;
+        this.first = first;
+        this.numberOfElement = numberOfElement;
+        this.last = last;
     }
 
     public Integer getNumber() {
