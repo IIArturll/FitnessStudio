@@ -5,7 +5,7 @@ import core.dtos.enums.UserStatus;
 import core.exceptions.MultipleErrorResponse;
 import core.validators.*;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,12 +16,12 @@ public class UserCreateDTO extends UserDTO {
     }
 
     public UserCreateDTO(String mail, String fio, UserRole role,
-                         UserStatus status, String password) throws MultipleErrorResponse{
-        super(UUID.randomUUID(), new Date(), new Date(), mail, fio, role, status);
+                         UserStatus status, String password) throws MultipleErrorResponse {
+        super(UUID.randomUUID(), Instant.now(), Instant.now(), mail, fio, role, status);
         this.password = password;
     }
 
-    public UserCreateDTO(UUID uuid, Date dt_create, Date dt_update, String mail,
+    public UserCreateDTO(UUID uuid, Instant dt_create, Instant dt_update, String mail,
                          String fio, UserRole role, UserStatus status, String password)
             throws MultipleErrorResponse {
         super(uuid, dt_create, dt_update, mail, fio, role, status);

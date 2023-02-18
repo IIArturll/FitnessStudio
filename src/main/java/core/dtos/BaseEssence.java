@@ -1,26 +1,24 @@
 package core.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
 @JsonPropertyOrder({"dt_create", "dt_update"})
 public abstract class BaseEssence {
-    @JsonIgnore
     protected UUID uuid;
     @JsonProperty("dt_create")
-    protected Date dtCreate;
+    protected Instant dtCreate;
     @JsonProperty("dt_update")
-    protected Date dtUpdate;
+    protected Instant dtUpdate;
 
     public BaseEssence() {
     }
 
-    public BaseEssence(UUID uuid, Date dt_create, Date dt_update) {
+    public BaseEssence(UUID uuid, Instant dt_create, Instant dt_update) {
         this.uuid = uuid;
         this.dtCreate = dt_create;
         this.dtUpdate = dt_update;
@@ -31,22 +29,22 @@ public abstract class BaseEssence {
     }
 
     public Long getDtCreate() {
-        return dtCreate.getTime();
+        return dtCreate.toEpochMilli();
     }
 
     public Long getDtUpdate() {
-        return dtUpdate.getTime();
+        return dtUpdate.toEpochMilli();
     }
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
-    public void setDtCreate(Date dtCreate) {
+    public void setDtCreate(Instant dtCreate) {
         this.dtCreate = dtCreate;
     }
 
-    public void setDtUpdate(Date dtUpdate) {
+    public void setDtUpdate(Instant dtUpdate) {
         this.dtUpdate = dtUpdate;
     }
 

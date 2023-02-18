@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import core.dtos.enums.UserRole;
 import core.dtos.enums.UserStatus;
 import core.exceptions.MultipleErrorResponse;
-import core.exceptions.SingleErrorResponse;
 import core.validators.FIOValidator;
 import core.validators.MailValidator;
 import core.validators.RoleValidator;
 import core.validators.StatusValidator;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,8 +29,9 @@ public class UserDTO extends BaseEssence {
     public UserDTO() {
     }
 
-    public UserDTO(String mail, String fio, UserRole role, UserStatus status) throws MultipleErrorResponse, SingleErrorResponse {
-        super(UUID.randomUUID(), new Date(), new Date());
+    public UserDTO(String mail, String fio, UserRole role, UserStatus status)
+            throws MultipleErrorResponse {
+        super(UUID.randomUUID(), Instant.now(), Instant.now());
         this.mail = mail;
         this.fio = fio;
         this.role = role;
@@ -39,8 +39,8 @@ public class UserDTO extends BaseEssence {
         validate();
     }
 
-    public UserDTO(UUID uuid, Date dt_create, Date dt_update, String mail,
-                   String fio, UserRole role, UserStatus status) throws MultipleErrorResponse{
+    public UserDTO(UUID uuid, Instant dt_create, Instant dt_update, String mail,
+                   String fio, UserRole role, UserStatus status) throws MultipleErrorResponse {
         super(uuid, dt_create, dt_update);
         this.mail = mail;
         this.fio = fio;
