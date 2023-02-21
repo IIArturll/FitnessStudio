@@ -1,7 +1,7 @@
 package web.controllers;
 
-import core.exceptions.MultipleErrorResponse;
-import core.exceptions.SingleErrorResponse;
+import fitness.core.exceptions.MultipleErrorResponse;
+import fitness.core.exceptions.SingleErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

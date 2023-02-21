@@ -1,8 +1,8 @@
 package web.controllers;
 
-import core.dtos.PageOfUserDTO;
-import core.dtos.UserCreateDTO;
-import core.dtos.UserDTO;
+import fitness.core.dtos.PageOfUserDTO;
+import fitness.core.dtos.UserCreateDTO;
+import fitness.core.dtos.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
