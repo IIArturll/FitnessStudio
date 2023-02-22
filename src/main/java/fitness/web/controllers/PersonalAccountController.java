@@ -1,4 +1,4 @@
-package web.controllers;
+package fitness.web.controllers;
 
 import fitness.core.dtos.UserDTO;
 import fitness.core.dtos.UserLoginDTO;

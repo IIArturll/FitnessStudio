@@ -1,4 +1,4 @@
-package web.controllers;
+package fitness.web.controllers;
 
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.exceptions.SingleErrorResponse;

@@ -1,8 +1,8 @@
-package core.validators;
+package fitness.core.validators;
 
-import core.exceptions.ErrorField;
-import core.exceptions.MultipleErrorResponse;
-import core.exceptions.SingleErrorResponse;
+import fitness.core.exceptions.ErrorField;
+import fitness.core.exceptions.MultipleErrorResponse;
+import fitness.core.exceptions.SingleErrorResponse;
 
 public class FIOValidator {
     public static void validate(MultipleErrorResponse errorResponse, String fio) {

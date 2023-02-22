@@ -1,13 +1,13 @@
-package core.dtos;
+package fitness.core.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import core.dtos.enums.UserRole;
-import core.dtos.enums.UserStatus;
-import core.exceptions.MultipleErrorResponse;
-import core.validators.FIOValidator;
-import core.validators.MailValidator;
-import core.validators.RoleValidator;
-import core.validators.StatusValidator;
+import fitness.core.dtos.enums.UserRole;
+import fitness.core.dtos.enums.UserStatus;
+import fitness.core.exceptions.MultipleErrorResponse;
+import fitness.core.validators.FIOValidator;
+import fitness.core.validators.MailValidator;
+import fitness.core.validators.RoleValidator;
+import fitness.core.validators.StatusValidator;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -108,18 +108,5 @@ public class UserDTO extends BaseEssence {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), mail, fio, role, status);
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "\nuuid= '" + uuid + '\'' +
-                ",\ndt_create= " + getDtCreate() +
-                ",\ndt_create= " + getDtUpdate() +
-                ",\nmail= '" + mail + '\'' +
-                ",\nfio= '" + fio + '\'' +
-                ",\nrole= " + role +
-                ",\nstatus=" + status +
-                "\n}";
     }
 }

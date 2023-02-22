@@ -1,9 +1,9 @@
-package core.dtos;
+package fitness.core.dtos;
 
-import core.dtos.enums.UserRole;
-import core.dtos.enums.UserStatus;
-import core.exceptions.MultipleErrorResponse;
-import core.validators.*;
+import fitness.core.dtos.enums.UserRole;
+import fitness.core.dtos.enums.UserStatus;
+import fitness.core.exceptions.MultipleErrorResponse;
+import fitness.core.validators.*;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -60,19 +60,5 @@ public class UserCreateDTO extends UserDTO {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), password);
-    }
-
-    @Override
-    public String toString() {
-        return "UserCreateDTO{" +
-                "uuid='" + uuid + '\'' +
-                "dt_create" + dtCreate +
-                "dt_update" + dtUpdate +
-                ", mail='" + mail + '\'' +
-                ", fio='" + fio + '\'' +
-                ", role=" + role +
-                ", status=" + status +
-                "password='" + password + '\'' +
-                "} ";
     }
 }

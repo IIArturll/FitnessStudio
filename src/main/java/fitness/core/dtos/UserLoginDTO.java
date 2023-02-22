@@ -1,8 +1,8 @@
-package core.dtos;
+package fitness.core.dtos;
 
-import core.exceptions.MultipleErrorResponse;
-import core.validators.MailValidator;
-import core.validators.PasswordValidator;
+import fitness.core.exceptions.MultipleErrorResponse;
+import fitness.core.validators.MailValidator;
+import fitness.core.validators.PasswordValidator;
 
 import java.util.Objects;
 
@@ -56,13 +56,5 @@ public class UserLoginDTO {
     @Override
     public int hashCode() {
         return Objects.hash(mail, password);
-    }
-
-    @Override
-    public String toString() {
-        return "UserLogin{" +
-                "mail='" + mail + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

@@ -1,4 +1,4 @@
-package core.dtos.enums;
+package fitness.core.dtos.enums;
 
 public enum UserStatus {
     WAITING_ACTIVATION,

@@ -1,6 +1,8 @@
-package core.dtos;
+package fitness.core.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import fitness.core.dtos.PageEssence;
+import fitness.core.dtos.UserDTO;
 
 import java.util.List;
 import java.util.Objects;

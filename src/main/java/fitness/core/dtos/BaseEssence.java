@@ -1,4 +1,4 @@
-package core.dtos;
+package fitness.core.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -28,12 +28,11 @@ public abstract class BaseEssence {
         return uuid;
     }
 
-    public Long getDtCreate() {
-        return dtCreate.toEpochMilli();
+    public Instant getDtCreate(){
+        return dtCreate;
     }
-
-    public Long getDtUpdate() {
-        return dtUpdate.toEpochMilli();
+    public Instant getDtUpdate() {
+        return dtUpdate;
     }
 
     public void setUuid(UUID uuid) {

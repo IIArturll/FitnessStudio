@@ -1,9 +1,9 @@
-package core.validators;
+package fitness.core.validators;
 
-import core.dtos.enums.UserRole;
-import core.exceptions.ErrorField;
-import core.exceptions.MultipleErrorResponse;
-import core.exceptions.SingleErrorResponse;
+import fitness.core.dtos.enums.UserRole;
+import fitness.core.exceptions.ErrorField;
+import fitness.core.exceptions.MultipleErrorResponse;
+import fitness.core.exceptions.SingleErrorResponse;
 
 public class RoleValidator {
     public static void validate(MultipleErrorResponse errorResponse, UserRole role) {
