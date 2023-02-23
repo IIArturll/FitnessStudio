@@ -1,4 +1,4 @@
-package fitness.core.dtos;
+package fitness.core.user.dtos;
 
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.validators.FIOValidator;

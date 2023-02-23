@@ -1,4 +1,4 @@
-package fitness.core.dtos;
+package fitness.core.user.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
