@@ -1,5 +1,6 @@
 package fitness.core.user.mappers;
 
+import fitness.core.user.dtos.UserCreateDTO;
 import fitness.core.user.dtos.UserDTO;
 import fitness.core.user.dtos.UserRegistrationDTO;
 import fitness.core.user.dtos.enums.UserRole;
@@ -25,14 +26,21 @@ public class UserConverter {
         return modelMapper.map(entity, UserDTO.class);
     }
 
-    public UserEntity convertToUserEntity(UserDTO userDTO){
+    public UserEntity convertToUserEntity(UserDTO userDTO) {
         UserEntity entity = modelMapper.map(userDTO, UserEntity.class);
         entity.setRole(new UserRoleEntity(userDTO.getRole()));
         entity.setStatus(new UserStatusEntity(userDTO.getStatus()));
         return entity;
     }
 
-    public UserEntity converToUserEntity(UserRegistrationDTO userDTO){
+    public UserEntity convertToUserEntity(UserCreateDTO user) {
+        UserEntity entity = modelMapper.map(user, UserEntity.class);
+        entity.setRole(new UserRoleEntity(user.getRole()));
+        entity.setStatus(new UserStatusEntity(user.getStatus()));
+        return entity;
+    }
+
+    public UserEntity converToUserEntity(UserRegistrationDTO userDTO) {
         UserEntity entity = modelMapper.map(userDTO, UserEntity.class);
         entity.setUuid(UUID.randomUUID());
         entity.setDtCreate(Instant.now());
