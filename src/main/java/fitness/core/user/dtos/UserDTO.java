@@ -1,8 +1,8 @@
-package fitness.core.dtos;
+package fitness.core.user.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import fitness.core.dtos.enums.UserRole;
-import fitness.core.dtos.enums.UserStatus;
+import fitness.core.user.dtos.enums.UserRole;
+import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.validators.FIOValidator;
 import fitness.core.validators.MailValidator;

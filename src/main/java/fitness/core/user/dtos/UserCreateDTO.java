@@ -1,14 +1,13 @@
-package fitness.core.dtos;
+package fitness.core.user.dtos;
 
-import fitness.core.dtos.enums.UserRole;
-import fitness.core.dtos.enums.UserStatus;
+import fitness.core.user.dtos.enums.UserRole;
+import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.validators.*;
 
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
-
 public class UserCreateDTO extends UserDTO {
     private String password;
 

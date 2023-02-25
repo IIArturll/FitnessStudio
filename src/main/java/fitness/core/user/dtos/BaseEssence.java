@@ -1,7 +1,11 @@
-package fitness.core.dtos;
+package fitness.core.user.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fitness.core.user.dtos.converters.InstantToLong;
+import fitness.core.user.dtos.converters.LongToInstant;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -11,8 +15,12 @@ import java.util.UUID;
 public abstract class BaseEssence {
     protected UUID uuid;
     @JsonProperty("dt_create")
+    @JsonSerialize(converter = InstantToLong.class)
+    @JsonDeserialize(converter = LongToInstant.class)
     protected Instant dtCreate;
     @JsonProperty("dt_update")
+    @JsonSerialize(converter = InstantToLong.class)
+    @JsonDeserialize(converter = LongToInstant.class)
     protected Instant dtUpdate;
 
     public BaseEssence() {

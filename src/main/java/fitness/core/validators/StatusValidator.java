@@ -1,6 +1,6 @@
 package fitness.core.validators;
 
-import fitness.core.dtos.enums.UserStatus;
+import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.ErrorField;
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.exceptions.SingleErrorResponse;
