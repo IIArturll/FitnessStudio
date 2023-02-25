@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import fitness.core.user.dtos.converters.InstantToLong;
-import fitness.core.user.dtos.converters.LongToInstant;
+import fitness.core.converters.InstantToLong;
+import fitness.core.converters.LongToInstant;
 
 import java.time.Instant;
 import java.util.Objects;
