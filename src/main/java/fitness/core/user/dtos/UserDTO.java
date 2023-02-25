@@ -1,6 +1,7 @@
 package fitness.core.user.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import fitness.core.BaseEssence;
 import fitness.core.user.dtos.enums.UserRole;
 import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.MultipleErrorResponse;
