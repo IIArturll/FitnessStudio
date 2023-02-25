@@ -29,7 +29,6 @@ public class UserService implements IUserService {
 
     @Override
     public void create(UserCreateDTO user) throws MultipleErrorResponse {
-        user.validate();
         UserEntity entity = converter.convertToUserEntity(user);
         entity.setUuid(UUID.randomUUID());
         entity.setDtCreate(Instant.now());
@@ -46,8 +45,7 @@ public class UserService implements IUserService {
 
     @Override
     public void update(UUID uuid, Long dt_update, UserCreateDTO createDTO)
-            throws SingleErrorResponse, MultipleErrorResponse {
-        createDTO.validate();
+            throws SingleErrorResponse{
         UserEntity user = repository.findById(uuid).orElseThrow(() ->
                 new SingleErrorResponse("NoSuchElement", "unknown uuid"));
         if (dt_update != user.getDtUpdate().toEpochMilli()) {

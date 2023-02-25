@@ -7,7 +7,6 @@ import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.exceptions.SingleErrorResponse;
 import fitness.core.user.mappers.UserConverter;
-import fitness.core.validators.MailValidator;
 import fitness.dao.repositories.user.api.IPersonalAccountRepository;
 import fitness.dao.repositories.user.entity.UserEntity;
 import fitness.dao.repositories.user.entity.UserStatusEntity;
@@ -30,13 +29,11 @@ public class PersonalAccountService implements IPersonalAccountService {
 
     @Override
     public void register(UserRegistrationDTO user) throws MultipleErrorResponse {
-        user.validate();
         repository.save(converter.converToUserEntity(user));
     }
 
     @Override
     public void verified(String code, String mail) throws SingleErrorResponse {
-        MailValidator.validate(mail);
         UserEntity user = repository.findByMail(mail).orElseThrow(() ->
                 new SingleErrorResponse("no such element", "unknown mail"));
         if (user.getUuid().toString().equals(code)) {
