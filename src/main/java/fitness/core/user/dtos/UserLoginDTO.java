@@ -8,12 +8,10 @@ import jakarta.validation.constraints.Pattern;
 import java.util.Objects;
 
 public class UserLoginDTO {
-    @NotNull
     @NotBlank
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$",
             message = "illegal format of email,correct example: email@mail.ru , google@gmail.com")
     public String mail;
-    @NotNull
     @NotBlank
     public String password;
 

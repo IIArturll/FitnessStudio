@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class UserCreateDTO extends UserDTO {
-    @NotNull
     @NotBlank
     private String password;
 

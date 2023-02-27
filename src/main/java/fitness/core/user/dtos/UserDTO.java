@@ -22,12 +22,10 @@ import java.util.UUID;
         "role",
         "status"})
 public class UserDTO extends BaseEssence {
-    @NotNull
     @NotBlank
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$",
             message = "illegal format of email,correct example: email@mail.ru , google@gmail.com")
     protected String mail;
-    @NotNull
     @NotBlank
     protected String fio;
     @NotNull

@@ -2,7 +2,6 @@ package fitness.core.user.dtos;
 
 import fitness.core.exceptions.MultipleErrorResponse;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
@@ -11,10 +10,8 @@ public class UserRegistrationDTO {
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$",
             message = "illegal format of email,correct example: email@mail.ru , google@gmail.com")
     private String mail;
-    @NotNull
     @NotBlank
     private String fio;
-    @NotNull
     @NotBlank
     private String password;
 
