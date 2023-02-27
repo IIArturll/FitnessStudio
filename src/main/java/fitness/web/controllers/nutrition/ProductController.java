@@ -3,6 +3,7 @@ package fitness.web.controllers.nutrition;
 import fitness.core.exceptions.SingleErrorResponse;
 import fitness.core.nutrition.dtos.ProductDTO;
 import fitness.services.nutrition.api.IProductService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody ProductDTO product) {
+    public ResponseEntity<?> add(@Valid @RequestBody ProductDTO product) {
         service.add(product);
         return ResponseEntity.status(201).build();
     }
@@ -33,7 +34,7 @@ public class ProductController {
     @PostMapping("/{uuid}/dt_update/{dt_update}")
     public ResponseEntity<?>update(@PathVariable(name = "uuid")UUID uuid,
                                    @PathVariable(name = "dt_update") Long dt_update,
-                                   @RequestBody ProductDTO productDTO) throws SingleErrorResponse {
+                                   @Valid @RequestBody ProductDTO productDTO) throws SingleErrorResponse {
         service.update(uuid,dt_update,productDTO);
         return ResponseEntity.status(200).build();
     }

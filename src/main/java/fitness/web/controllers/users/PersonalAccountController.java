@@ -6,6 +6,7 @@ import fitness.core.user.dtos.UserRegistrationDTO;
 import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.exceptions.SingleErrorResponse;
 import fitness.services.user.api.IPersonalAccountService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class PersonalAccountController {
     }
 
     @PostMapping(path = "/registration")
-    public ResponseEntity<?> register(@RequestBody UserRegistrationDTO user) throws MultipleErrorResponse {
+    public ResponseEntity<?> register(@Valid @RequestBody UserRegistrationDTO user) throws MultipleErrorResponse {
         service.register(user);
         return ResponseEntity.status(201).build();
     }
@@ -32,7 +33,7 @@ public class PersonalAccountController {
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<?> login(@RequestBody UserLoginDTO user) {
+    public ResponseEntity<?> login(@Valid @RequestBody UserLoginDTO user) {
         return ResponseEntity.status(200).build();
     }
 
