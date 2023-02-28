@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS fitness.user_role
 
 CREATE TABLE fitness.user
 (
-    uuid UUID NOT NULL,
+    id UUID NOT NULL,
     dt_create TIMESTAMP(6) WITH TIME ZONE NOT NULL,
     dt_update TIMESTAMP(6) WITH TIME ZONE NOT NULL,
     mail TEXT NOT NULL UNIQUE,
@@ -24,7 +24,7 @@ CREATE TABLE fitness.user
     role SMALLINT NOT NULL,
     status SMALLINT NOT NULL,
     password TEXT NOT NULL,
-    CONSTRAINT uuid_user PRIMARY KEY (uuid),
+    CONSTRAINT uuid_user PRIMARY KEY (id),
     FOREIGN KEY (role)
         REFERENCES fitness.user_role (id),
     FOREIGN KEY (status)
