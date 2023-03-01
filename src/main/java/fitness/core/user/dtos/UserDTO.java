@@ -1,13 +1,14 @@
 package fitness.core.user.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import fitness.core.BaseEssence;
 import fitness.core.user.dtos.enums.UserRole;
 import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.MultipleErrorResponse;
-import fitness.core.validators.FIOValidator;
-import fitness.core.validators.MailValidator;
-import fitness.core.validators.RoleValidator;
-import fitness.core.validators.StatusValidator;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -21,9 +22,15 @@ import java.util.UUID;
         "role",
         "status"})
 public class UserDTO extends BaseEssence {
+    @NotBlank
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$",
+            message = "illegal format of email,correct example: email@mail.ru , google@gmail.com")
     protected String mail;
+    @NotBlank
     protected String fio;
+    @NotNull
     protected UserRole role;
+    @NotNull
     protected UserStatus status;
 
     public UserDTO() {
@@ -36,7 +43,6 @@ public class UserDTO extends BaseEssence {
         this.fio = fio;
         this.role = role;
         this.status = status;
-        validate();
     }
 
     public UserDTO(UUID uuid, Instant dt_create, Instant dt_update, String mail,
@@ -46,7 +52,6 @@ public class UserDTO extends BaseEssence {
         this.fio = fio;
         this.role = role;
         this.status = status;
-        validate();
     }
 
     public String getMail() {
@@ -79,17 +84,6 @@ public class UserDTO extends BaseEssence {
 
     public void setStatus(UserStatus status) {
         this.status = status;
-    }
-
-    public void validate() throws MultipleErrorResponse {
-        MultipleErrorResponse errorResponse = new MultipleErrorResponse("invalid fields");
-        MailValidator.validate(errorResponse, this.mail);
-        FIOValidator.validate(errorResponse, this.fio);
-        RoleValidator.validate(errorResponse, this.role);
-        StatusValidator.validate(errorResponse, this.status);
-        if (!errorResponse.getErrors().isEmpty()) {
-            throw errorResponse;
-        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package fitness.core.user.dtos.converters;
+package fitness.core.converters;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
 

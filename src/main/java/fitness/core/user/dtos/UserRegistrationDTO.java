@@ -1,15 +1,18 @@
 package fitness.core.user.dtos;
 
 import fitness.core.exceptions.MultipleErrorResponse;
-import fitness.core.validators.FIOValidator;
-import fitness.core.validators.MailValidator;
-import fitness.core.validators.PasswordValidator;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
 
 public class UserRegistrationDTO {
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$",
+            message = "illegal format of email,correct example: email@mail.ru , google@gmail.com")
     private String mail;
+    @NotBlank
     private String fio;
+    @NotBlank
     private String password;
 
     public UserRegistrationDTO() {
@@ -19,7 +22,6 @@ public class UserRegistrationDTO {
         this.mail = mail;
         this.fio = fio;
         this.password = password;
-        validate();
     }
 
     public String getMail() {
@@ -44,16 +46,6 @@ public class UserRegistrationDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void validate() throws MultipleErrorResponse {
-        MultipleErrorResponse errorResponse = new MultipleErrorResponse("invalid fields");
-        MailValidator.validate(errorResponse, this.mail);
-        FIOValidator.validate(errorResponse, this.fio);
-        PasswordValidator.validate(errorResponse, this.password);
-        if (!errorResponse.getErrors().isEmpty()) {
-            throw errorResponse;
-        }
     }
 
     @Override

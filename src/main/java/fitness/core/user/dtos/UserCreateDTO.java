@@ -3,12 +3,15 @@ package fitness.core.user.dtos;
 import fitness.core.user.dtos.enums.UserRole;
 import fitness.core.user.dtos.enums.UserStatus;
 import fitness.core.exceptions.MultipleErrorResponse;
-import fitness.core.validators.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
+
 public class UserCreateDTO extends UserDTO {
+    @NotBlank
     private String password;
 
     public UserCreateDTO() {
@@ -33,18 +36,6 @@ public class UserCreateDTO extends UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void validate() throws MultipleErrorResponse {
-        MultipleErrorResponse errorResponse = new MultipleErrorResponse("invalid fields");
-        MailValidator.validate(errorResponse, this.mail);
-        FIOValidator.validate(errorResponse, this.fio);
-        RoleValidator.validate(errorResponse, this.role);
-        StatusValidator.validate(errorResponse, this.status);
-        PasswordValidator.validate(errorResponse, password);
-        if (!errorResponse.getErrors().isEmpty()) {
-            throw errorResponse;
-        }
     }
 
     @Override
