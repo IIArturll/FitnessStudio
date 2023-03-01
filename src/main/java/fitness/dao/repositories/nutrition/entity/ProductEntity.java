@@ -51,6 +51,16 @@ public class ProductEntity {
         this.carbohydrates = carbohydrates;
     }
 
+    public ProductEntity(String title, Integer weight, Integer calories,
+                         Double proteins, Double fats, Double carbohydrates) {
+        this.title = title;
+        this.weight = weight;
+        this.calories = calories;
+        this.proteins = proteins;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+    }
+
     public UUID getUuid() {
         return uuid;
     }
