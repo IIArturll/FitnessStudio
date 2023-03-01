@@ -22,8 +22,7 @@ CREATE TABLE IF NOT EXISTS fitness.product_model
     weight INT NOT NULL,
     CONSTRAINT product_model_pk PRIMARY KEY (id),
     CONSTRAINT product_id_fk FOREIGN KEY (product_id)
-            REFERENCES fitness.product (id),
-    CONSTRAINT repeat_product_model UNIQUE(product_id,weight)
+            REFERENCES fitness.product (id)
 );
 
 CREATE TABLE IF NOT EXISTS fitness.recipe
