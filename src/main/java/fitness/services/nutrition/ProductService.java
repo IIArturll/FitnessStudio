@@ -52,4 +52,10 @@ public class ProductService implements IProductService {
         productEntity.setCarbohydrates(product.getCarbohydrates());
         repository.save(productEntity);
     }
+
+    @Override
+    public ProductEntity find(UUID uuid) throws SingleErrorResponse {
+        return repository.findById(uuid).orElseThrow(()->
+                new SingleErrorResponse("err", "no product with this uuid"));
+    }
 }
