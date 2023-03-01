@@ -13,6 +13,7 @@ import java.util.UUID;
 public class UserEntity {
     @Id()
     @GeneratedValue
+    @Column(name = "id")
     private UUID uuid;
     @Column(name = "dt_create")
     private Instant dtCreate;
