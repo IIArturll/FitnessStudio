@@ -1,5 +1,6 @@
 package fitness.core.user.mappers;
 
+import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.user.dtos.UserCreateDTO;
 import fitness.core.user.dtos.UserDTO;
 import fitness.core.user.dtos.UserRegistrationDTO;
@@ -8,7 +9,6 @@ import fitness.core.user.dtos.enums.UserStatus;
 import fitness.dao.repositories.user.entity.UserEntity;
 import fitness.dao.repositories.user.entity.UserRoleEntity;
 import fitness.dao.repositories.user.entity.UserStatusEntity;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -16,35 +16,33 @@ import java.util.UUID;
 
 @Component
 public class UserConverter {
-    private final ModelMapper modelMapper;
 
     public UserConverter() {
-        this.modelMapper = new ModelMapper();
+
     }
 
-    public UserDTO convertToUserDTO(UserEntity entity) {
-        return modelMapper.map(entity, UserDTO.class);
-    }
-
-    public UserEntity convertToUserEntity(UserDTO userDTO) {
-        UserEntity entity = modelMapper.map(userDTO, UserEntity.class);
-        entity.setRole(new UserRoleEntity(userDTO.getRole()));
-        entity.setStatus(new UserStatusEntity(userDTO.getStatus()));
-        return entity;
+    public UserDTO convertToUserDTO(UserEntity entity) throws MultipleErrorResponse {
+        return new UserDTO(entity.getUuid(), entity.getDtCreate(),
+                entity.getDtUpdate(), entity.getMail(),
+                entity.getFio(), entity.getRole().getRole(), entity.getStatus().getStatus());
     }
 
     public UserEntity convertToUserEntity(UserCreateDTO user) {
-        UserEntity entity = modelMapper.map(user, UserEntity.class);
+        UserEntity entity = new UserEntity();
+        entity.setMail(user.getMail());
+        entity.setFio(user.getFio());
         entity.setRole(new UserRoleEntity(user.getRole()));
         entity.setStatus(new UserStatusEntity(user.getStatus()));
+        entity.setPassword(user.getPassword());
         return entity;
     }
 
     public UserEntity converToUserEntity(UserRegistrationDTO userDTO) {
-        UserEntity entity = modelMapper.map(userDTO, UserEntity.class);
-        entity.setUuid(UUID.randomUUID());
+        UserEntity entity=new UserEntity();
         entity.setDtCreate(Instant.now());
-        entity.setDtUpdate(Instant.now());
+        entity.setMail(userDTO.getMail());
+        entity.setFio(userDTO.getFio());
+        entity.setPassword(userDTO.getPassword());
         entity.setRole(new UserRoleEntity(UserRole.USER));
         entity.setStatus(new UserStatusEntity(UserStatus.WAITING_ACTIVATION));
         return entity;

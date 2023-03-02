@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface IUserService {
     void create(UserCreateDTO user) throws MultipleErrorResponse;
 
-    UserDTO get(UUID uuid) throws SingleErrorResponse;
+    UserDTO get(UUID uuid) throws SingleErrorResponse, MultipleErrorResponse;
 
     void update(UUID uuid, Long dt_update, UserCreateDTO user) throws SingleErrorResponse, MultipleErrorResponse;
 

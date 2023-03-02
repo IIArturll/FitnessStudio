@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/{uuid}")
-    public ResponseEntity<UserDTO> get(@PathVariable("uuid") UUID uuid) throws SingleErrorResponse {
+    public ResponseEntity<UserDTO> get(@PathVariable("uuid") UUID uuid) throws SingleErrorResponse, MultipleErrorResponse {
         return ResponseEntity.status(200).body(service.get(uuid));
     }
 

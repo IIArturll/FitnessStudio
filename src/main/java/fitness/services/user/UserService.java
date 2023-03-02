@@ -37,7 +37,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO get(UUID uuid) throws SingleErrorResponse {
+    public UserDTO get(UUID uuid) throws SingleErrorResponse, MultipleErrorResponse {
         UserEntity user = repository.findById(uuid).orElseThrow(() ->
                 new SingleErrorResponse("NoSuchElement", "unknown uuid"));
         return converter.convertToUserDTO(user);
@@ -61,6 +61,12 @@ public class UserService implements IUserService {
 
     @Override
     public Page<UserDTO> getPage(Pageable pageable) {
-        return repository.findAll(pageable).map(converter::convertToUserDTO);
+        return repository.findAll(pageable).map(entity -> {
+            try {
+                return converter.convertToUserDTO(entity);
+            } catch (MultipleErrorResponse e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
