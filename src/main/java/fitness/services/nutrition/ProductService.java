@@ -38,10 +38,10 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void update(UUID uuid, Long dt_update, ProductDTO product) throws SingleErrorResponse {
+    public void update(UUID uuid, Instant dtUpdate, ProductDTO product) throws SingleErrorResponse {
         ProductEntity productEntity = repository.findById(uuid).orElseThrow(() ->
                 new SingleErrorResponse("err", "no product with this id : " + uuid));
-        if (productEntity.getDtUpdate().toEpochMilli() != dt_update) {
+        if (productEntity.getDtUpdate().toEpochMilli() != dtUpdate.toEpochMilli()) {
             throw new SingleErrorResponse("err", "product already has been update");
         }
         productEntity.setTitle(product.getTitle());
