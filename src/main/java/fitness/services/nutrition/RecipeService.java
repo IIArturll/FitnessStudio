@@ -49,7 +49,6 @@ public class RecipeService implements IRecipeService {
             throw new SingleErrorResponse("err",
                     "recipe already has been update");
         }
-        //переделать
         var newEntity = converter.convertToRecipeEntity(recipe);
         entity.setComposition(newEntity.getComposition());
         entity.setTitle(newEntity.getTitle());

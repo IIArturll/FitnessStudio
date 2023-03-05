@@ -1,10 +1,13 @@
 package fitness.core.nutrition.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import fitness.core.BaseEssence;
+import fitness.core.converters.DoubleSerializer;
 import jakarta.validation.constraints.*;
 
 import java.util.List;
+
 @JsonPropertyOrder(value = {
         "uuid",
         "dt_create",
@@ -23,10 +26,13 @@ public class RecipeDTO extends BaseEssence {
     @Positive
     private Integer calories;
     @Positive
+    @JsonSerialize(using = DoubleSerializer.class)
     private Double proteins;
     @Positive
+    @JsonSerialize(using = DoubleSerializer.class)
     private Double fats;
     @Positive
+    @JsonSerialize(using = DoubleSerializer.class)
     private Double carbohydrates;
 
     public RecipeDTO(String title, List<ProductCompositionDTO> composition,
