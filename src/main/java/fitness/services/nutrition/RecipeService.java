@@ -6,7 +6,6 @@ import fitness.core.nutrition.dtos.RecipeForCUDTO;
 import fitness.core.nutrition.mappers.RecipeConverter;
 import fitness.dao.repositories.nutrition.api.IRecipeRepository;
 import fitness.dao.repositories.nutrition.entity.RecipeEntity;
-import fitness.services.nutrition.api.IProductService;
 import fitness.services.nutrition.api.IRecipeService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,12 +39,12 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
-    public void update(UUID uuid, Long dt_update, RecipeForCUDTO recipe)
+    public void update(UUID uuid, Instant dtUpdate, RecipeForCUDTO recipe)
             throws SingleErrorResponse {
         RecipeEntity entity = repository.findById(uuid).orElseThrow(() ->
                 new SingleErrorResponse("err",
                         "recipe with this id: " + uuid + " not found"));
-        if (entity.getDtUpdate().toEpochMilli() != dt_update) {
+        if (entity.getDtUpdate().toEpochMilli() != dtUpdate.toEpochMilli()) {
             throw new SingleErrorResponse("err",
                     "recipe already has been update");
         }
