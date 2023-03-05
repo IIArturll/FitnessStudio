@@ -26,7 +26,6 @@ public class ProductService implements IProductService {
     @Override
     public void add(ProductDTO product) {
         ProductEntity productEntity = converter.convertToEntity(product);
-        productEntity.setUuid(UUID.randomUUID());
         productEntity.setDtCreate(Instant.now());
         productEntity.setDtUpdate(Instant.now());
         repository.save(productEntity);

@@ -30,6 +30,7 @@ public class RecipeService implements IRecipeService {
     public void add(RecipeForCUDTO recipe) throws SingleErrorResponse {
         RecipeEntity entity = converter.convertToRecipeEntity(recipe);
         entity.setDtCreate(Instant.now());
+        entity.setDtUpdate(Instant.now());
         repository.save(entity);
     }
 
@@ -48,6 +49,7 @@ public class RecipeService implements IRecipeService {
             throw new SingleErrorResponse("err",
                     "recipe already has been update");
         }
+        //переделать
         var newEntity = converter.convertToRecipeEntity(recipe);
         entity.setComposition(newEntity.getComposition());
         entity.setTitle(newEntity.getTitle());

@@ -29,7 +29,6 @@ public class UserService implements IUserService {
     @Override
     public void create(UserCreateDTO user) {
         UserEntity entity = converter.convertToUserEntity(user);
-        entity.setUuid(UUID.randomUUID());
         entity.setDtCreate(Instant.now());
         entity.setDtUpdate(Instant.now());
         repository.save(entity);

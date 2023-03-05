@@ -10,7 +10,6 @@ import fitness.dao.repositories.nutrition.entity.RecipeEntity;
 import fitness.services.nutrition.api.IProductService;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class RecipeConverter {
 
     public RecipeEntity convertToRecipeEntity(RecipeForCUDTO recipeDTO) throws SingleErrorResponse {
         RecipeEntity entity = new RecipeEntity();
-        entity.setDtCreate(Instant.now());
         entity.setTitle(recipeDTO.getTitle());
         List<ProductModelEntity> list = new ArrayList<>();
         for (var c : recipeDTO.getComposition()) {

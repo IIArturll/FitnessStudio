@@ -10,7 +10,6 @@ import fitness.dao.repositories.user.entity.UserRoleEntity;
 import fitness.dao.repositories.user.entity.UserStatusEntity;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
 
 @Component
 public class UserConverter {
@@ -36,8 +35,7 @@ public class UserConverter {
     }
 
     public UserEntity converToUserEntity(UserRegistrationDTO userDTO) {
-        UserEntity entity=new UserEntity();
-        entity.setDtCreate(Instant.now());
+        UserEntity entity = new UserEntity();
         entity.setMail(userDTO.getMail());
         entity.setFio(userDTO.getFio());
         entity.setPassword(userDTO.getPassword());
