@@ -2,7 +2,6 @@ package fitness.services.user;
 
 import fitness.core.user.dtos.UserCreateDTO;
 import fitness.core.user.dtos.UserDTO;
-import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.exceptions.SingleErrorResponse;
 import fitness.core.user.mappers.UserConverter;
 import fitness.dao.repositories.user.api.IUserRepository;
@@ -28,7 +27,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void create(UserCreateDTO user) throws MultipleErrorResponse {
+    public void create(UserCreateDTO user) {
         UserEntity entity = converter.convertToUserEntity(user);
         entity.setUuid(UUID.randomUUID());
         entity.setDtCreate(Instant.now());
@@ -37,18 +36,18 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO get(UUID uuid) throws SingleErrorResponse, MultipleErrorResponse {
+    public UserDTO get(UUID uuid) throws SingleErrorResponse {
         UserEntity user = repository.findById(uuid).orElseThrow(() ->
                 new SingleErrorResponse("NoSuchElement", "unknown uuid"));
         return converter.convertToUserDTO(user);
     }
 
     @Override
-    public void update(UUID uuid, Long dt_update, UserCreateDTO createDTO)
-            throws SingleErrorResponse{
+    public void update(UUID uuid, Instant dtUpdate, UserCreateDTO createDTO)
+            throws SingleErrorResponse {
         UserEntity user = repository.findById(uuid).orElseThrow(() ->
                 new SingleErrorResponse("NoSuchElement", "unknown uuid"));
-        if (dt_update != user.getDtUpdate().toEpochMilli()) {
+        if (dtUpdate.toEpochMilli() != user.getDtUpdate().toEpochMilli()) {
             throw new SingleErrorResponse("error", "user has already been updated");
         }
         user.setMail(createDTO.getMail());
@@ -61,12 +60,6 @@ public class UserService implements IUserService {
 
     @Override
     public Page<UserDTO> getPage(Pageable pageable) {
-        return repository.findAll(pageable).map(entity -> {
-            try {
-                return converter.convertToUserDTO(entity);
-            } catch (MultipleErrorResponse e) {
-                throw new RuntimeException(e);
-            }
-        });
+        return repository.findAll(pageable).map(converter::convertToUserDTO);
     }
 }
