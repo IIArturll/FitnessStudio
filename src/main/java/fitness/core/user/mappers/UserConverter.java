@@ -1,6 +1,5 @@
 package fitness.core.user.mappers;
 
-import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.user.dtos.UserCreateDTO;
 import fitness.core.user.dtos.UserDTO;
 import fitness.core.user.dtos.UserRegistrationDTO;
@@ -12,7 +11,6 @@ import fitness.dao.repositories.user.entity.UserStatusEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.UUID;
 
 @Component
 public class UserConverter {
@@ -21,7 +19,7 @@ public class UserConverter {
 
     }
 
-    public UserDTO convertToUserDTO(UserEntity entity) throws MultipleErrorResponse {
+    public UserDTO convertToUserDTO(UserEntity entity) {
         return new UserDTO(entity.getUuid(), entity.getDtCreate(),
                 entity.getDtUpdate(), entity.getMail(),
                 entity.getFio(), entity.getRole().getRole(), entity.getStatus().getStatus());

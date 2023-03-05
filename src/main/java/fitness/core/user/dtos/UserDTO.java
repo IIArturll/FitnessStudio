@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import fitness.core.BaseEssence;
 import fitness.core.user.dtos.enums.UserRole;
 import fitness.core.user.dtos.enums.UserStatus;
-import fitness.core.exceptions.MultipleErrorResponse;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,8 +35,7 @@ public class UserDTO extends BaseEssence {
     public UserDTO() {
     }
 
-    public UserDTO(String mail, String fio, UserRole role, UserStatus status)
-            throws MultipleErrorResponse {
+    public UserDTO(String mail, String fio, UserRole role, UserStatus status) {
         super(UUID.randomUUID(), Instant.now(), Instant.now());
         this.mail = mail;
         this.fio = fio;
@@ -46,7 +44,7 @@ public class UserDTO extends BaseEssence {
     }
 
     public UserDTO(UUID uuid, Instant dt_create, Instant dt_update, String mail,
-                   String fio, UserRole role, UserStatus status) throws MultipleErrorResponse {
+                   String fio, UserRole role, UserStatus status) {
         super(uuid, dt_create, dt_update);
         this.mail = mail;
         this.fio = fio;
