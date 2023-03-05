@@ -1,5 +1,7 @@
 package fitness.core.nutrition.dtos;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import fitness.core.converters.DoubleSerializer;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
@@ -14,12 +16,15 @@ public class ProductCompositionDTO {
     private Integer calories;
     @NotNull
     @Positive
+    @JsonSerialize(using = DoubleSerializer.class)
     private Double proteins;
     @NotNull
     @Positive
+    @JsonSerialize(using = DoubleSerializer.class)
     private Double fats;
     @NotNull
     @Positive
+    @JsonSerialize(using = DoubleSerializer.class)
     private Double carbohydrates;
 
     public ProductCompositionDTO() {

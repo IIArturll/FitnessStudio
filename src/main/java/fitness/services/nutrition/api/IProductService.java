@@ -6,6 +6,7 @@ import fitness.dao.repositories.nutrition.entity.ProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.Instant;
 import java.util.UUID;
 
 public interface IProductService {
@@ -13,7 +14,7 @@ public interface IProductService {
 
     Page<ProductDTO> getPage(Pageable pageable);
 
-    void update(UUID uuid,Long dt_update,ProductDTO product) throws SingleErrorResponse;
+    void update(UUID uuid, Instant dtUpdate, ProductDTO product) throws SingleErrorResponse;
 
     ProductEntity find(UUID uuid) throws SingleErrorResponse;
 }

@@ -4,7 +4,6 @@ import fitness.core.user.dtos.UserDTO;
 import fitness.core.user.dtos.UserLoginDTO;
 import fitness.core.user.dtos.UserRegistrationDTO;
 import fitness.core.user.dtos.enums.UserStatus;
-import fitness.core.exceptions.MultipleErrorResponse;
 import fitness.core.exceptions.SingleErrorResponse;
 import fitness.core.user.mappers.UserConverter;
 import fitness.dao.repositories.user.api.IPersonalAccountRepository;
@@ -13,6 +12,7 @@ import fitness.dao.repositories.user.entity.UserStatusEntity;
 import fitness.services.user.api.IPersonalAccountService;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Service
@@ -28,8 +28,11 @@ public class PersonalAccountService implements IPersonalAccountService {
 
 
     @Override
-    public void register(UserRegistrationDTO user) throws MultipleErrorResponse {
-        repository.save(converter.converToUserEntity(user));
+    public void register(UserRegistrationDTO user) {
+        UserEntity entity = converter.converToUserEntity(user);
+        entity.setDtCreate(Instant.now());
+        entity.setDtUpdate(Instant.now());
+        repository.save(entity);
     }
 
     @Override

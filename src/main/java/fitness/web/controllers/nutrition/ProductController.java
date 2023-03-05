@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @RestController
@@ -31,11 +32,11 @@ public class ProductController {
         return ResponseEntity.status(200).body(service.getPage(pageable));
     }
 
-    @PostMapping("/{uuid}/dt_update/{dt_update}")
+    @PutMapping("/{uuid}/dt_update/{dt_update}")
     public ResponseEntity<?>update(@PathVariable(name = "uuid")UUID uuid,
-                                   @PathVariable(name = "dt_update") Long dt_update,
+                                   @PathVariable(name = "dt_update") Instant dtUpdate,
                                    @Valid @RequestBody ProductDTO productDTO) throws SingleErrorResponse {
-        service.update(uuid,dt_update,productDTO);
+        service.update(uuid,dtUpdate,productDTO);
         return ResponseEntity.status(200).build();
     }
 }

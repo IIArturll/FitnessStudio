@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @RestController
@@ -35,9 +36,9 @@ public class RecipeController {
 
     @PutMapping(value = "/{uuid}/dt_update/{dt_update}")
     public ResponseEntity<?> update(@PathVariable("uuid") UUID uuid,
-                                    @PathVariable("dt_update") Long dt_update,
+                                    @PathVariable("dt_update") Instant dtUpdate,
                                     @Valid @RequestBody RecipeForCUDTO recipe) throws SingleErrorResponse {
-        service.update(uuid, dt_update, recipe);
+        service.update(uuid, dtUpdate, recipe);
         return ResponseEntity.status(200).build();
     }
 }
