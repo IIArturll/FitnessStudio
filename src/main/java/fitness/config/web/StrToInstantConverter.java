@@ -1,4 +1,4 @@
-package fitness.core.converters;
+package fitness.config.web;
 
 
 import org.springframework.core.convert.converter.Converter;
