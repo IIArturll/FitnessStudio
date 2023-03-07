@@ -4,3 +4,7 @@ spring:
     username: postgres
     password: 1
     url: jdbc:postgresql://localhost:5432/fitnessStudio
+  jpa:
+    show-sql: true
+server:
+  port: 8080
